@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MathQuest Dashboard</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="dashboard">
+    <h2 id="greeting">Welcome, Adventurer!</h2>
+    <p>Select a World to Begin Your Quest:</p>
+    <div class="worlds">
+      <button class="world" onclick="enterWorld('Number Kingdom')">Number Kingdom</button>
+      <button class="world" onclick="enterWorld('Shape Valley')">Shape Valley</button>
+      <button class="world" onclick="enterWorld('Fraction Forest')">Fraction Forest</button>
+      <button class="world" onclick="enterWorld('Algebra Arena')">Algebra Arena</button>
+    </div>
+    <button id="logout">Logout</button>
+  </div>
+
+  <script>
+    const userData = JSON.parse(localStorage.getItem('mathQuestUser'));
+    const greeting = document.getElementById('greeting');
+
+    if (!userData) {
+      window.location.href = 'index.html';
+    } else {
+      greeting.textContent = `Welcome, ${userData.username} (Grade ${userData.grade})!`;
+    }
+
+    function enterWorld(world) {
+      alert(`Entering ${world}...`); // Placeholder - replace with world level logic
+    }
+
+    document.getElementById('logout').addEventListener('click', () => {
+      localStorage.removeItem('mathQuestUser');
+      window.location.href = 'index.html';
+    });
+  </script>
+</body>
+</html>
