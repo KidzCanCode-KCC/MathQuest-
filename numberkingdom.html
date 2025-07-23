@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Number Kingdom - MathQuest</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="game-world">
+    <h2>Welcome to Number Kingdom!</h2>
+    <div id="question-box">
+      <p id="question">Loading question...</p>
+      <input type="number" id="answer" placeholder="Your answer here" />
+      <button onclick="checkAnswer()">Submit</button>
+    </div>
+    <p id="feedback"></p>
+    <p id="score">Score: 0</p>
+    <button onclick="goBack()">Return to Dashboard</button>
+  </div>
+
+  <script>
+    const questions = [
+      { q: 'What is 3 + 4?', a: 7 },
+      { q: 'What is 9 - 2?', a: 7 },
+      { q: 'What is 5 + 5?', a: 10 },
+      { q: 'What is 6 + 1?', a: 7 },
+      { q: 'What is 8 - 3?', a: 5 }
+    ];
+
+    let current = 0;
+    let score = 0;
+
+    function loadQuestion() {
+      document.getElementById('question').textContent = questions[current].q;
+      document.getElementById('answer').value = '';
+      document.getElementById('feedback').textContent = '';
+    }
+
+    function checkAnswer() {
+      const userAnswer = parseInt(document.getElementById('answer').value);
+      if (userAnswer === questions[current].a) {
+        score++;
+        document.getElementById('feedback').textContent = 'Correct! 🎉';
+      } else {
+        document.getElementById('feedback').textContent = 'Oops! Try the next one!';
+      }
+
+      document.getElementById('score').textContent = `Score: ${score}`;
+      current++;
+
+      if (current < questions.length) {
+        setTimeout(loadQuestion, 1000);
+      } else {
+        document.getElementById('question-box').innerHTML = '<h3>Well done, Math Knight! 🏆</h3>';
+      }
+    }
+
+    function goBack() {
+      window.location.href = 'dashboard.html';
+    }
+
+    loadQuestion();
+  </script>
+</body>
+</html>
